@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLC2026 Organic Reach Strategy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+/* 1. THE SETUP */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #121212;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* Prevent scrolling, use slider instead */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Urbanist', sans-serif;
+}
+
+/* Presentation Viewport & Track */
+.presentation-viewport {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    border-radius: 8px;
+    background-color: #0d0d0d;
+}
+
+.slides-track {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Smooth slide effect */
+}
+
+/* Individual Slide Styling */
+.slide-container {
+  flex: 0 0 100%; /* Each slide takes full width of viewport */
+  height: 100%;
+  width: 100%;
+  padding: 40px 50px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Reset previous margins/shadows since we are inside a viewport now */
+  box-shadow: none;
+  margin: 0;
+  border-radius: 0;
+  background-color: #0d0d0d;
+}
+
+/* 1.1 BACKGROUND STYLING - Afro-centric Patterns/Shapes */
+
+.slide-container::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  background-image: repeating-linear-gradient(45deg, rgba(0, 230, 118, 0.03) 0px, rgba(0, 230, 118, 0.03) 2px, transparent 2px, transparent 10px);
+  z-index: 0;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.slide-container::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  left: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0,200,83,0.08) 0%, rgba(0,0,0,0) 70%);
+  z-index: 0;
+  border-radius: 50%;
+}
+
+/* 2. CONSISTENT TYPOGRAPHY */
+
+.slide-container h1,
+.slide-container h2,
+.slide-container h3,
+.slide-container h4 {
+  color: #ffffff;
+  font-weight: 700;
+  font-family: 'Urbanist', sans-serif;
+  margin: 0;
+  z-index: 1;
+}
+
+/* SalesRuby Green Accent */
+.text-accent {
+  color: #00E676; 
+}
+
+.slide-container p,
+.slide-container .subtitle,
+.slide-container li {
+  color: #e0e0e0;
+  font-family: 'Urbanist', sans-serif;
+  z-index: 1;
+}
+
+/* Consistent Font Sizes */
+
+.slide-container h1 {
+  font-size: 64px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.slide-title {
+  font-size: 48px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.slide-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+  height: 4px;
+  background-color: #00E676;
+  border-radius: 2px;
+}
+
+.slide-container .subtitle {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.content-area {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    width: 100%;
+    z-index: 1;
+}
+
+
+/* 3. LAYOUT DEFINITIONS */
+
+/* Title Slide */
+.title-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  gap: 40px;
+}
+
+.title-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.title-image {
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.title-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.9) contrast(1.1);
+}
+
+/* Two Column Layout */
+.two-column {
+  display: flex;
+  gap: 50px;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.two-column > div {
+    flex: 1;
+}
+
+.bullet-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bullet-list li {
+  font-size: 20px;
+  margin-bottom: 20px;
+  padding-left: 35px;
+  position: relative;
+}
+
+.bullet-list li i {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  color: #00E676;
+  font-size: 18px;
+}
+
+/* Tiled Text with Icons */
+.tiled-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  width: 100%;
+}
+
+.tile {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 16px;
+  padding: 30px;
+  transition: transform 0.3s ease;
+}
+
+.tile .icon {
+  font-size: 32px;
+  color: #00E676;
+  margin-bottom: 20px;
+}
+
+.tile h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.tile p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #cccccc;
+}
+
+/* Image Right Text Left */
+.image-wrapper {
+  border-radius: 16px;
+  overflow: hidden;
+  height: 450px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Bleed Image Right */
+.slide-container.bleed-image-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 0;
+  gap: 0;
+  align-items: start;
+}
+
+.slide-container.bleed-image-layout > .content-container {
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.slide-container.bleed-image-layout .bleed-text-side h2 {
+    font-size: 48px;
+    margin-bottom: 30px;
+    color: #fff;
+}
+
+.slide-container.bleed-image-layout .bleed-text-side p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.slide-container.bleed-image-layout img.bleed-image-side {
+  height: 720px;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Tiled Images */
+.tiled-images-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 100%;
+}
+
+.image-tile {
+    background-color: #1e1e1e;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.image-tile .img-frame {
+    height: 200px;
+    width: 100%;
+}
+
+.image-tile .img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-tile .text-frame {
+    padding: 20px;
+    text-align: center;
+}
+
+.image-tile h3 {
+    font-size: 20px;
+    color: #00E676;
+    margin-bottom: 10px;
+}
+
+.image-tile p {
+    font-size: 16px;
+}
+
+/* Timeline */
+.timeline-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 0;
+}
+
+.timeline-line {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #333;
+    z-index: 0;
+}
+
+.timeline-item {
+    position: relative;
+    z-index: 1;
+    width: 22%;
+    text-align: center;
+}
+
+.timeline-dot {
+    width: 24px;
+    height: 24px;
+    background-color: #00E676;
+    border-radius: 50%;
+    margin: 0 auto 30px; /* Aligns with line top 50px - 12px center */
+    border: 4px solid #1a1a1a;
+    position: relative;
+    top: 38px;
+}
+
+.timeline-content {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 50px;
+    border-top: 3px solid #00E676;
+}
+
+.timeline-content h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.timeline-content p {
+    font-size: 14px;
+}
+
+/* Highlighted Numbers */
+.highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.highlight-item h2 {
+    font-size: 80px;
+    color: #00E676;
+    margin-bottom: 10px;
+}
+
+.highlight-item p {
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 4. NAVIGATION CONTROLS */
+
+.nav-controls {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 100;
+}
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: #00E676;
+    border-color: #00E676;
+    color: black;
+}
+
+.slide-counter {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    font-weight: 700;
+    min-width: 60px;
+    text-align: center;
+}
+
+/* 5. ANIMATIONS */
+
+/* Elements hidden by default */
+.slide-container h1, 
+.slide-container h2, 
+.slide-container h3, 
+.slide-container p, 
+.slide-container li,
+.slide-container img,
+.tile, .image-tile, .highlight-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* When slide is active, animate in */
+.slide-container.active h1, 
+.slide-container.active h2, 
+.slide-container.active h3, 
+.slide-container.active p, 
+.slide-container.active li,
+.slide-container.active img,
+.slide-container.active .tile,
+.slide-container.active .image-tile,
+.slide-container.active .highlight-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered delays */
+.slide-container.active h1 { transition-delay: 0.1s; }
+.slide-container.active h2 { transition-delay: 0.2s; }
+.slide-container.active p { transition-delay: 0.3s; }
+.slide-container.active .image-wrapper, 
+.slide-container.active .title-image { transition-delay: 0.4s; }
+
+/* List Item Stagger */
+.slide-container.active li:nth-child(1) { transition-delay: 0.4s; }
+.slide-container.active li:nth-child(2) { transition-delay: 0.5s; }
+.slide-container.active li:nth-child(3) { transition-delay: 0.6s; }
+.slide-container.active li:nth-child(4) { transition-delay: 0.7s; }
+
+/* Grid Item Stagger */
+.slide-container.active .tile:nth-child(1), .slide-container.active .image-tile:nth-child(1) { transition-delay: 0.4s; }
+.slide-container.active .tile:nth-child(2), .slide-container.active .image-tile:nth-child(2) { transition-delay: 0.5s; }
+.slide-container.active .tile:nth-child(3), .slide-container.active .image-tile:nth-child(3) { transition-delay: 0.6s; }
+
+    </style>
+</head>
+<body>
+
+<div class="presentation-viewport">
+    
+    <div class="slides-track" id="track">
+        
+        <!-- Slide 1: Title Slide -->
+        <div class="slide-container active" id="slide1">
+            <div class="title-layout">
+                <div class="title-content">
+                    <p style="text-transform: uppercase; letter-spacing: 2px; color: #00E676; font-weight: 700;">Sales Leadership Conference 2026</p>
+                    <h1>High Impact<br><span class="text-accent">Organic Reach</span><br>Strategy</h1>
+                    <p class="subtitle">Driving 500 Qualified Leads through Strategic Content, Community Engagement, and Industry Authority.</p>
+                </div>
+                <div class="title-image">
+                    <img src="https://loremflickr.com/1280/720/business,conference,africa/all?lock=1" 
+                         onerror="this.src='https://placehold.co/1280x720/1e1e1e/00E676?text=Conference+Image'" 
+                         alt="Professional African business conference audience">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Strategic Objective (Highlight Numbers) -->
+        <div class="slide-container" id="slide2">
+            <h2 class="slide-title">Strategic Objectives & Audience</h2>
+            <div class="content-area">
+                <div class="highlight-grid">
+                    <div class="highlight-item">
+                        <h2>500</h2>
+                        <p>Organic Leads Target</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h2>5X</h2>
+                        <p>Growth Theme</p>
+                    </div>
+                    <div class="highlight-item">
+                        <h2>4</h2>
+                        <p>Industry Cohorts</p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    <strong>Target Audience:</strong> Senior & Mid-level Sales Leaders (2+ Years Experience) in Real Estate, FMCG, Tech, and Finance. Leaders who manage numbers and influence revenue.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Core Value Proposition (Two Column) -->
+        <div class="slide-container" id="slide3">
+            <h2 class="slide-title">The "Hook": Selling Value at Scale</h2>
+            <div class="content-area">
+                <div class="two-column">
+                    <div>
+                        <p class="subtitle" style="margin-bottom: 20px;">Positioning SLC2026 not as a motivation event, but as a <span class="text-accent">modern leadership intervention</span>.</p>
+                        <ul class="bullet-list">
+                            <li><i class="fa-solid fa-check"></i> <strong>Shift the Narrative:</strong> Move from "Selling Products" to "Selling Outcomes".</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>Scientific Approach:</strong> Emphasize "Disciplined Execution" and "winning from within".</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>Urgency:</strong> Markets have shifted. Trust is harder to earn. Growth is not guaranteed.</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>Outcome:</strong> This content angle attracts serious professionals looking for solutions, not just inspiration.</li>
+                        </ul>
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="https://loremflickr.com/800/600/business,man,african/all?lock=2" 
+                             onerror="this.src='https://placehold.co/800x600/1e1e1e/00E676?text=Speaker+Image'" 
+                             alt="Confident Nigerian business executive speaking at corporate event">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Content Pillars (Tiled Text) -->
+        <div class="slide-container" id="slide4">
+            <h2 class="slide-title">Organic Content Pillars</h2>
+            <div class="content-area">
+                <div class="tiled-content">
+                    <div class="tile">
+                        <div class="icon"><i class="fa-solid fa-brain"></i></div>
+                        <h3>Thought Leadership</h3>
+                        <p>Deep-dive posts from Bunmi Jembola & Faculty on "The 5X Consultant" model. Why modern leaders must become indispensable advisors.</p>
+                    </div>
+                    <div class="tile">
+                        <div class="icon"><i class="fa-solid fa-video"></i></div>
+                        <h3>The "Teaser" Campaign</h3>
+                        <p>Short video clips from the "Fundamentals of Selling Program" (FSP). Give value upfront to prove the quality of the upcoming conference.</p>
+                    </div>
+                    <div class="tile">
+                        <div class="icon"><i class="fa-solid fa-users-viewfinder"></i></div>
+                        <h3>Alumni Stories</h3>
+                        <p>Case studies of past attendees who achieved "5X" growth. Social proof is the strongest organic driver for B2B events.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Speaker Advocacy (Image Right) -->
+        <div class="slide-container" id="slide5">
+            <h2 class="slide-title">The Speaker Amplify Program</h2>
+            <div class="content-area">
+                <div class="two-column">
+                    <div>
+                        <p style="margin-bottom: 20px;">Leverage the collective reach of the faculty to drive organic visibility.</p>
+                        <ul class="bullet-list">
+                            <li><i class="fa-brands fa-linkedin"></i> <strong>Faculty Takeovers:</strong> Have Tayo Olatunji (Nestle) or Kehinde Ogundare (Zoho) post specific industry insights on their LinkedIn profiles with the #SLC2026 tag.</li>
+                            <li><i class="fa-solid fa-bullhorn"></i> <strong>"I'm Speaking" Assets:</strong> Provide high-quality graphics to Stephen Asishana and others to share their specific session topics (e.g., "Navigating Internal Politics").</li>
+                            <li><i class="fa-solid fa-comments"></i> <strong>Live Q&A Sessions:</strong> Host weekly 15-min LinkedIn Live sessions with a facilitator leading up to May 1st.</li>
+                        </ul>
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="https://loremflickr.com/800/600/business,woman,african/all?lock=3" 
+                             onerror="this.src='https://placehold.co/800x600/1e1e1e/00E676?text=Professional+with+Phone'" 
+                             alt="African professional using smartphone for business">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Industry Cohorts (Tiled Images) -->
+        <div class="slide-container" id="slide6">
+            <h2 class="slide-title">Targeting Industry Niches</h2>
+            <div class="content-area">
+                <div class="tiled-images-container">
+                    <div class="image-tile">
+                        <div class="img-frame">
+                            <img src="https://loremflickr.com/800/600/mercedes,luxury,mansion/all?lock=41" 
+                                 onerror="this.src='https://placehold.co/800x600/1e1e1e/00E676?text=Luxury+Real+Estate+%26+Auto'" 
+                                 alt="Luxury car parked in front of modern mansion">
+                        </div>
+                        <div class="text-frame">
+                            <h3>Real Estate & Auto</h3>
+                            <p>Content Focus: "Handling High-Value Objections" & "Building Trust with Ultra-HNIs".</p>
+                        </div>
+                    </div>
+                    <div class="image-tile">
+                        <div class="img-frame">
+                            <img src="https://loremflickr.com/800/600/oil,refinery,platform/all?lock=51" 
+                                 onerror="this.src='https://placehold.co/800x600/1e1e1e/00E676?text=Oil+%26+Gas+Industry'" 
+                                 alt="Oil refinery infrastructure">
+                        </div>
+                        <div class="text-frame">
+                            <h3>B2B & Oil/Gas</h3>
+                            <p>Content Focus: "Mapping Power" & "Navigating Multi-Stakeholder Buying Committees".</p>
+                        </div>
+                    </div>
+                    <div class="image-tile">
+                        <div class="img-frame">
+                            <img src="https://loremflickr.com/800/600/supermarket,coca-cola,shelves/all?lock=61" 
+                                 onerror="this.src='https://placehold.co/800x600/1e1e1e/00E676?text=FMCG+%26+Retail'" 
+                                 alt="Stocked supermarket shelves with recognizable brands">
+                        </div>
+                        <div class="text-frame">
+                            <h3>FMCG & Retail</h3>
+                            <p>Content Focus: "Distributor Management Strategies" & "Winning at Retail Execution".</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Lead Magnet (Bleed Image Right) -->
+        <div class="slide-container bleed-image-layout" id="slide7">
+            <div class="content-container">
+                <div class="bleed-text-side">
+                    <h2 style="color: #00E676;">The "FSP" Lead Magnet</h2>
+                    <p><strong>The Strategy:</strong> Use the bundled online training as a powerful incentive for early registration and organic sharing.</p>
+                    <p><strong>The Offer:</strong> "Register for SLC2026 and get 1-month free access to the Fundamentals of Selling Program (FSP) on Global Sales University."</p>
+                    <p><strong>Execution:</strong> Launch this campaign heavily in February. The online training starts March 4, creating a natural urgency deadline that drives organic conversions before the physical event.</p>
+                </div>
+            </div>
+            <div class="image-container">
+                <img class="bleed-image-side" 
+                     src="https://loremflickr.com/800/600/black,student,laptop/all?lock=7" 
+                     onerror="this.src='https://placehold.co/800x600/1e1e1e/00E676?text=Online+Learning'" 
+                     alt="African woman studying online on laptop">
+            </div>
+        </div>
+
+        <!-- Slide 8: LinkedIn Optimization (Two Column) -->
+        <div class="slide-container" id="slide8">
+            <h2 class="slide-title">LinkedIn Growth Tactics</h2>
+            <div class="content-area">
+                <div class="two-column">
+                    <div class="image-wrapper">
+                         <img src="https://loremflickr.com/800/600/office,team,african/all?lock=8" 
+                              onerror="this.src='https://placehold.co/800x600/1e1e1e/00E676?text=Team+Meeting'" 
+                              alt="African creative team working on digital strategy">
+                    </div>
+                    <div>
+                        <ul class="bullet-list">
+                            <li><i class="fa-solid fa-crosshairs"></i> <strong>Bio Optimization:</strong> Update SalesRuby and Bunmi Jembola's profiles to link directly to the SLC2026 landing page with a clear CTA.</li>
+                            <li><i class="fa-solid fa-comment-dots"></i> <strong>Comment Strategy:</strong> Engage with top Nigerian sales voices (Top 50 influencers). Add value in comments to drive profile views.</li>
+                            <li><i class="fa-solid fa-file-pdf"></i> <strong>Carousel Documents:</strong> Create PDF carousels summarizing "5 Ways Buyers Are Changing" (from the event content). These get the highest organic reach on LinkedIn.</li>
+                            <li><i class="fa-solid fa-envelope-open-text"></i> <strong>Newsletter:</strong> Launch a weekly "Road to SLC" LinkedIn Newsletter.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Execution Timeline (Timeline) -->
+        <div class="slide-container" id="slide9">
+            <h2 class="slide-title">Execution Roadmap</h2>
+            <div class="content-area">
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Feb 15 - 28</h3>
+                            <p><strong>Launch Phase:</strong> Announce Speakers, Activate Alumni, Open FSP Early Bird Offer.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>March 1 - 31</h3>
+                            <p><strong>Content Phase:</strong> "FSP" Online Training Begins. Weekly Faculty Lives. Industry Cohort Carousels.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>April 1 - 30</h3>
+                            <p><strong>Conversion Phase:</strong> Urgency countdowns. "Behind the Scenes" content. Final Seat Filling.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>May 1 & 21</h3>
+                            <p><strong>Event Days:</strong> Live coverage in Lagos and Abuja. Real-time attendee testimonials.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: KPIs & Metrics (Table) -->
+        <div class="slide-container" id="slide10">
+            <h2 class="slide-title">Success Metrics (KPIs)</h2>
+            <div class="content-area">
+                <div class="tiled-content">
+                     <div class="tile" style="text-align: center;">
+                        <h3 class="text-accent" style="font-size: 40px;">50k+</h3>
+                        <p><strong>Total Organic Impressions</strong><br>Across Facebook, IG and YouTube via Faculty & Brand channels.</p>
+                    </div>
+                    <div class="tile" style="text-align: center;">
+                        <h3 class="text-accent" style="font-size: 40px;">2.5%</h3>
+                        <p><strong>Click-Through Rate (CTR)</strong><br>Target for LinkedIn Carousels and Video Teasers.</p>
+                    </div>
+                    <div class="tile" style="text-align: center;">
+                        <h3 class="text-accent" style="font-size: 40px;">500</h3>
+                        <p><strong>Qualified Leads</strong><br>Registrations attributed to organic social & search (Non-Paid).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Closing Slide -->
+        <div class="slide-container" id="slide11" style="text-align: center;">
+            <div class="title-layout" style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                <h1 style="font-size: 80px;">Let's Achieve <span class="text-accent">5X!</span></h1>
+                <p class="subtitle">Ready to execute this high-impact organic strategy?</p>
+                <p style="margin-top: 30px; font-size: 20px; color: #aaa;">www.salesruby.com/SLC2026</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="slide-counter" id="counter">1 / 11</div>
+        <button class="nav-btn" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide-container');
+    const track = document.getElementById('track');
+    const counter = document.getElementById('counter');
+    const totalSlides = slides.length;
+
+    function updateSlide() {
+        // Move the track
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        // Update Counter
+        counter.innerText = `${currentSlide + 1} / ${totalSlides}`;
+
+        // Trigger animations by toggling 'active' class
+        slides.forEach((slide, index) => {
+            if (index === currentSlide) {
+                slide.classList.add('active');
+            } else {
+                slide.classList.remove('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+            currentSlide++;
+            updateSlide();
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateSlide();
+        }
+    }
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+            nextSlide();
+        } else if (e.key === 'ArrowLeft') {
+            prevSlide();
+        }
+    });
+
+    // Initialize
+    updateSlide();
+</script>
+
+</body>
+</html>
